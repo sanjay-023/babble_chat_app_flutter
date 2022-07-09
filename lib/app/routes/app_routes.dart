@@ -12,6 +12,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const SAUTHENTICATION = _Paths.SAUTHENTICATION;
   static const AUTHENTICATION = _Paths.AUTHENTICATION;
+  static const SEARCH = _Paths.SEARCH;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const SAUTHENTICATION = '/sauthentication';
   static const AUTHENTICATION = '/authentication';
+  static const SEARCH = '/search';
 }
