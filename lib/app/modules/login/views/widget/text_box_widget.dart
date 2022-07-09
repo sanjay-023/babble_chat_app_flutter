@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class TextBoxWidget extends StatelessWidget {
   const TextBoxWidget(
-      {Key? key, required this.textBoxController, required this.hText})
+      {Key? key,
+      required this.textBoxController,
+      required this.hText,
+      this.passwordBoxIndex})
       : super(key: key);
   final TextEditingController textBoxController;
   final String hText;
+  final int? passwordBoxIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +22,10 @@ class TextBoxWidget extends StatelessWidget {
       child: TextField(
         style: TextStyle(color: Colors.white),
         controller: textBoxController,
+        obscureText: passwordBoxIndex == 1 ? true : false,
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.all(5),
+
           hintText: hText,
           hintStyle: TextStyle(color: Color.fromARGB(128, 255, 254, 254)),
           focusedBorder: InputBorder.none,

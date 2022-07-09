@@ -60,11 +60,20 @@ class LoginView extends GetView<LoginController> {
                 TextBoxWidget(
                   hText: "Enter your password",
                   textBoxController: loginController.passwordController,
+                  passwordBoxIndex: 1,
                 ),
                 SizedBox(
                   height: 15,
                 ),
-                LoginButtonWidget()
+                LoginButtonWidget(),
+                TextButton(
+                    onPressed: () {
+                      loginController.forgotPasswordPopUp();
+                    },
+                    child: Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ))
               ],
             ),
           ),

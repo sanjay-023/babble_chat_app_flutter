@@ -1,3 +1,4 @@
+import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:babbleapp/app/modules/onboard/views/widget/onboard_button.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ import '../controllers/onboard_controller.dart';
 class OnboardView extends GetView<OnboardController> {
   @override
   Widget build(BuildContext context) {
+    final authServiceController = Get.put(AuthService());
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 19, 18, 18),
       body: Padding(
@@ -66,7 +68,9 @@ class OnboardView extends GetView<OnboardController> {
                         width: 10,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          await authServiceController.googleSignUp();
+                        },
                         child: Image.asset(
                           "asset/images/googleLogo.png",
                           height: 30,

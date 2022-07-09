@@ -1,3 +1,4 @@
+import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/birthday_widget.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/email_box.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/phone_box.dart';
@@ -11,6 +12,7 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
+    final authServiceController = Get.put(AuthService());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

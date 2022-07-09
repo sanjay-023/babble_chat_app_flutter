@@ -2,42 +2,24 @@ import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+final authServiceController = Get.put(AuthService());
+
 class SignupController extends GetxController {
-  // //TODO: Implement SignupController
-
-  // final count = 0.obs;
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {}
-  // void increment() => count.value++;
-
-  final fNameController = TextEditingController();
-  final lNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final signupPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   final authServiceController = Get.put(AuthService());
   bool isLoading = false;
 
   signMeup() {
-    if (emailController.text.isNotEmpty ||
-        signupPasswordController.text.isNotEmpty ||
-        fNameController.text.isNotEmpty ||
-        lNameController.text.isNotEmpty) {
+    if (authServiceController.emailController.text.isNotEmpty ||
+        authServiceController.signupPasswordController.text.isNotEmpty ||
+        authServiceController.fNameController.text.isNotEmpty ||
+        authServiceController.lNameController.text.isNotEmpty) {
       if (emailValidateFun() == true) {
-        if (signupPasswordController.text.length >= 6) {
-          if (signupPasswordController.text == confirmPasswordController.text) {
+        if (authServiceController.signupPasswordController.text.length >= 6) {
+          if (authServiceController.signupPasswordController.text ==
+              authServiceController.confirmPasswordController.text) {
             authServiceController.signUpwithemail(
-                emailController.text, signupPasswordController.text);
+                authServiceController.emailController.text,
+                authServiceController.signupPasswordController.text);
           } else {
             showErrorSnack("Password does not match");
           }
@@ -67,7 +49,7 @@ class SignupController extends GetxController {
   emailValidateFun() {
     final emailValide = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (emailValide.hasMatch(emailController.text)) {
+    if (emailValide.hasMatch(authServiceController.emailController.text)) {
       return true;
     }
   }

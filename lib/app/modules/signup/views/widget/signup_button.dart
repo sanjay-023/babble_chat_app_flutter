@@ -10,7 +10,7 @@ class SignupButton extends StatelessWidget {
     final signupController = Get.put(SignupController());
     return ElevatedButton(
         onPressed: () {
-          signupController.isLoading = true;
+          //signupController.isLoading = true;
           signupController.signMeup();
         },
         child: Text("Sign up"),

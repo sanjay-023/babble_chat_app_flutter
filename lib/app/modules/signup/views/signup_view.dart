@@ -1,3 +1,4 @@
+import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:babbleapp/app/modules/login/views/widget/text_box_widget.dart';
 import 'package:babbleapp/app/modules/signup/views/widget/signup_button.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../controllers/signup_controller.dart';
 class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
+    final authServiceController = Get.put(AuthService());
     final signupController = Get.put(SignupController());
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 19, 18, 18),
@@ -58,34 +60,39 @@ class SignupView extends GetView<SignupController> {
                         height: 50,
                       ),
                       TextBoxWidget(
-                          textBoxController: signupController.fNameController,
+                          textBoxController:
+                              authServiceController.fNameController,
                           hText: "Enter your first name"),
                       SizedBox(
                         height: 15,
                       ),
                       TextBoxWidget(
-                          textBoxController: signupController.lNameController,
+                          textBoxController:
+                              authServiceController.lNameController,
                           hText: "Enter your last name"),
                       SizedBox(
                         height: 15,
                       ),
                       TextBoxWidget(
-                          textBoxController: signupController.emailController,
+                          textBoxController:
+                              authServiceController.emailController,
                           hText: "Enter your email"),
                       SizedBox(
                         height: 15,
                       ),
                       TextBoxWidget(
                           textBoxController:
-                              signupController.signupPasswordController,
-                          hText: "Enter password"),
+                              authServiceController.signupPasswordController,
+                          hText: "Enter password",
+                          passwordBoxIndex: 1),
                       SizedBox(
                         height: 15,
                       ),
                       TextBoxWidget(
                           textBoxController:
-                              signupController.confirmPasswordController,
-                          hText: "Confirm password"),
+                              authServiceController.confirmPasswordController,
+                          hText: "Confirm password",
+                          passwordBoxIndex: 1),
                       SizedBox(
                         height: 15,
                       ),
