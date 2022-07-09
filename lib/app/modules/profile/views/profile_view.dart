@@ -1,4 +1,3 @@
-import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/birthday_widget.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/email_box.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/phone_box.dart';
@@ -12,7 +11,7 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
-    final authServiceController = Get.put(AuthService());
+    final profileController = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -28,8 +27,25 @@ class ProfileView extends GetView<ProfileController> {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: 44,
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 44,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            profileController.addPhoto();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 50, left: 60),
+                            child: CircleAvatar(
+                              child: Icon(Icons.add_a_photo),
+                              backgroundColor: Color.fromARGB(255, 12, 120, 16),
+                              radius: 16,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     SizedBox(
                       width: 15,
