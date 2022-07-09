@@ -1,5 +1,4 @@
 import 'package:babbleapp/app/data/services/auth_service.dart';
-import 'package:babbleapp/app/modules/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,19 +34,15 @@ class SignupController extends GetxController {
         fNameController.text.isNotEmpty ||
         lNameController.text.isNotEmpty) {
       if (emailValidateFun() == true) {
-        if (signupPasswordController.text == confirmPasswordController.text) {
-          authServiceController
-              .signUpwithemail(
-                  emailController.text, signupPasswordController.text)
-              .then((value) => {
-                    changeLoadingStatus(),
-                    Get.to(HomeView()),
-                    changeLoadingStatusToFalse()
-                  });
-
-          update();
+        if (signupPasswordController.text.length >= 6) {
+          if (signupPasswordController.text == confirmPasswordController.text) {
+            authServiceController.signUpwithemail(
+                emailController.text, signupPasswordController.text);
+          } else {
+            showErrorSnack("Password does not match");
+          }
         } else {
-          showErrorSnack("Password does not match");
+          showErrorSnack("Password should contain atleast 6 charecters");
         }
       } else {
         showErrorSnack("Enter a valid email");

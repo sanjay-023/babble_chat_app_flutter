@@ -1,4 +1,5 @@
-import 'package:babbleapp/app/modules/home/views/home_view.dart';
+import 'package:babbleapp/app/data/services/auth_service.dart';
+import 'package:babbleapp/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,9 +8,13 @@ class LoginButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authServiceController = Get.put(AuthService());
+    final loginController = Get.put(LoginController());
     return ElevatedButton(
         onPressed: () {
-          Get.to(HomeView());
+          authServiceController.logInWithEmail(
+              loginController.emailController.text,
+              loginController.passwordController.text);
         },
         child: Text("Log in"),
         style: ElevatedButton.styleFrom(

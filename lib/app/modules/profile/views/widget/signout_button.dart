@@ -1,4 +1,4 @@
-import 'package:babbleapp/app/modules/login/views/login_view.dart';
+import 'package:babbleapp/app/data/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,9 +7,10 @@ class SignoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authServiceController = Get.put(AuthService());
     return ElevatedButton(
         onPressed: () {
-          Get.offAll(LoginView());
+          authServiceController.signOut();
         },
         child: Text("Sign out"),
         style: ElevatedButton.styleFrom(

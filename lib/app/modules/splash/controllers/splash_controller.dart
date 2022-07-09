@@ -1,4 +1,4 @@
-import 'package:babbleapp/app/modules/onboard/views/onboard_view.dart';
+import 'package:babbleapp/app/modules/authentication/views/authentication_view.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -21,6 +21,6 @@ class SplashController extends GetxController {
 
   Future<void> gotoOnBoard() async {
     await Future.delayed(const Duration(seconds: 3));
-    Get.off(OnboardView());
+    Get.off(AuthenticationView());
   }
 }

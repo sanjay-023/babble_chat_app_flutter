@@ -16,6 +16,7 @@ class TextBoxWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(30)),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
+        style: TextStyle(color: Colors.white),
         controller: textBoxController,
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.all(5),
