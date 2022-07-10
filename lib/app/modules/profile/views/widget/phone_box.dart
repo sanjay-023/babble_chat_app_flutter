@@ -27,7 +27,7 @@ class PhoneBoxwidget extends StatelessWidget {
             color: Colors.white,
           ),
           title: Text(
-            "7907382574",
+            "Tap to add contact number",
             style: TextStyle(color: Colors.white),
           ),
         ),

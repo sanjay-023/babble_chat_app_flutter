@@ -1,28 +1,36 @@
 import 'dart:io';
 
+import 'package:babbleapp/app/data/model/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 
 class ProfileController extends GetxController {
   File? img;
   File? cropedImg;
-  // //TODO: Implement ProfileController
+  String? userImageUrl;
+  UserModel userModel = UserModel();
+  User? user = FirebaseAuth.instance.currentUser;
 
-  // final count = 0.obs;
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    getData();
+  }
 
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {}
-  // void increment() => count.value++;
+  void getData() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      userModel = UserModel.fromMap(value.data());
+      update();
+    });
+  }
 
   void addPhoto() async {
     final pickImage =
@@ -39,8 +47,30 @@ class ProfileController extends GetxController {
         sourcePath: filepath,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1));
     if (cropImage != null) {
-      cropedImg = File(cropedImg!.path);
+      cropedImg = File(cropImage.path);
+      print("hai$cropedImg");
+      update();
+      updateImage();
       update();
     }
+  }
+
+  void updateImage() async {
+    final fileName = DateTime.now().millisecond.toString();
+    fStorage.Reference reference = fStorage.FirebaseStorage.instance
+        .ref()
+        .child("userimage")
+        .child(fileName);
+    fStorage.UploadTask uploadTask = reference.putFile(cropedImg!);
+    fStorage.TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    await taskSnapshot.ref.getDownloadURL().then((url) async {
+      userImageUrl = url;
+    });
+    update();
+
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'imageurl': userImageUrl});
   }
 }

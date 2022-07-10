@@ -1,3 +1,4 @@
+import 'package:babbleapp/app/modules/chat/views/chat_view.dart';
 import 'package:babbleapp/app/modules/search/controllers/search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,10 @@ class SearchListWidget extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   trailing: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.off(ChatView());
+                      searchController.searchTextController.clear();
+                    },
                     child: Container(
                       height: 30,
                       width: 80,

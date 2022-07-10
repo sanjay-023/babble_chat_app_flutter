@@ -1,3 +1,4 @@
+import 'package:babbleapp/app/modules/profile/views/widget/avatar_widget.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/birthday_widget.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/email_box.dart';
 import 'package:babbleapp/app/modules/profile/views/widget/phone_box.dart';
@@ -29,9 +30,10 @@ class ProfileView extends GetView<ProfileController> {
                   children: [
                     Stack(
                       children: [
-                        CircleAvatar(
-                          radius: 44,
-                        ),
+                        GetBuilder<ProfileController>(builder: (controller) {
+                          return CommonCircleAvatar(
+                              radius: 44, size: Size(90, 90));
+                        }),
                         InkWell(
                           onTap: () {
                             profileController.addPhoto();
@@ -50,25 +52,29 @@ class ProfileView extends GetView<ProfileController> {
                     SizedBox(
                       width: 15,
                     ),
-                    SizedBox(
-                      height: 60,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Sanjay Damodharan",
-                            style: TextStyle(color: Colors.white, fontSize: 22),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "@sanjay023",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
-                          )
-                        ],
-                      ),
-                    )
+                    GetBuilder<ProfileController>(builder: (contrroller) {
+                      return SizedBox(
+                        height: 60,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${profileController.userModel.firstName.toString().capitalizeFirst} ${profileController.userModel.lastName.toString().capitalizeFirst}",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 22),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "@${profileController.userModel.firstName}",
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 16),
+                            )
+                          ],
+                        ),
+                      );
+                    })
                   ],
                 ),
                 SizedBox(

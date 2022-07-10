@@ -1,4 +1,7 @@
+import 'package:babbleapp/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
+
+final profileController = Get.put(ProfileController());
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -6,12 +9,8 @@ class HomeController extends GetxController {
   final count = 0.obs;
   @override
   void onInit() {
+    profileController.getData();
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   @override

@@ -1,4 +1,7 @@
+import 'package:babbleapp/app/modules/home/controllers/home_controller.dart';
+import 'package:babbleapp/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EmailBoxWidget extends StatelessWidget {
   EmailBoxWidget({
@@ -21,16 +24,18 @@ class EmailBoxWidget extends StatelessWidget {
                   blurRadius: 6,
                   spreadRadius: 0.5)
             ]),
-        child: ListTile(
-          leading: Icon(
-            Icons.email,
-            color: Colors.white,
-          ),
-          title: Text(
-            "sanjay@gmail.com",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+        child: GetBuilder<ProfileController>(builder: (controller) {
+          return ListTile(
+            leading: Icon(
+              Icons.email,
+              color: Colors.white,
+            ),
+            title: Text(
+              profileController.userModel.email!,
+              style: TextStyle(color: Colors.white),
+            ),
+          );
+        }),
       ),
     );
   }
