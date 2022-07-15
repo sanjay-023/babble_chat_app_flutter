@@ -1,27 +1,13 @@
+import 'package:babbleapp/app/data/function/constants.dart';
+import 'package:babbleapp/app/data/function/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchController extends GetxController {
-  // //TODO: Implement SearchController
-
-  // final count = 0.obs;
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {}
-  // void increment() => count.value++;
-
   final searchTextController = TextEditingController();
   QuerySnapshot? searchSnapshot;
+  int? searchIndex;
 
   Future getUserByFName(String fName) async {
     return await FirebaseFirestore.instance
@@ -33,4 +19,30 @@ class SearchController extends GetxController {
       update();
     });
   }
+
+  createChatROmmAndStartConvo(String chatUserName) {
+    final databaseController = Get.put(DatabaseMethod());
+    String chatroomId = getChatRoomId(chatUserName, Constants.myName);
+    final constController = Get.put(Constants());
+    constController.getUserInfo();
+    List<String?> chatUsers = [chatUserName, Constants.myName];
+    Map<String, dynamic> chatRoomMap = {
+      "users": chatUsers,
+      "charroomid": chatroomId
+    };
+    databaseController.createChatRoom(chatUserName, chatRoomMap);
+  }
+
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "${b}_ $a";
+    } else {
+      return "${a}_$b";
+    }
+  }
+
+  // changeSearchIndex(index) {
+  //   searchIndex = index;
+  //   update();
+  // }
 }

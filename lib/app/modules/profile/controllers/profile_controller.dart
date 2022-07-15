@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:babbleapp/app/data/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,8 +22,8 @@ class ProfileController extends GetxController {
     getData();
   }
 
-  void getData() {
-    FirebaseFirestore.instance
+  Future getData() async {
+    await FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
         .get()
@@ -71,6 +72,8 @@ class ProfileController extends GetxController {
     await FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({'imageurl': userImageUrl});
+        .update({'imageurl': userImageUrl}).then((value) {
+      return Fluttertoast.showToast(msg: "Profile Updated");
+    });
   }
 }

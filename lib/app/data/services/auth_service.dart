@@ -1,11 +1,14 @@
+import 'package:babbleapp/app/data/function/helper_functions.dart';
 import 'package:babbleapp/app/data/model/user_model.dart';
 import 'package:babbleapp/app/modules/authentication/views/authentication_view.dart';
+import 'package:babbleapp/app/modules/home/views/home_view.dart';
 import 'package:babbleapp/app/modules/signup/controllers/signup_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final signupController = Get.put(SignupController());
 
@@ -33,7 +36,7 @@ class AuthService extends GetxController {
 
       userModel(firebaseUser);
 
-      Get.off(AuthenticationView());
+      Get.off((HomeView()));
     } catch (e) {
       signupController.showErrorSnack(e.toString());
     }
@@ -56,7 +59,10 @@ class AuthService extends GetxController {
 
       userModel(firebaseUser);
       postDataToFirebase();
-      Get.offAll(AuthenticationView());
+      HelperFunction.saveUserName(fNameController.text);
+      HelperFunction.saveUserEmail(emailController.text);
+
+      Get.offAll(HomeView());
 
       update();
     } catch (e) {
@@ -107,5 +113,10 @@ class AuthService extends GetxController {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
+  }
+
+  void clearSharedprfns() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
   }
 }

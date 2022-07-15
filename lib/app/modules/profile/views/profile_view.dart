@@ -13,6 +13,8 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.put(ProfileController());
+    print(profileController.userModel.email);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -80,7 +82,9 @@ class ProfileView extends GetView<ProfileController> {
                 SizedBox(
                   height: 30,
                 ),
-                EmailBoxWidget(),
+                GetBuilder<ProfileController>(builder: (controller) {
+                  return EmailBoxWidget();
+                }),
                 SizedBox(
                   height: 15,
                 ),

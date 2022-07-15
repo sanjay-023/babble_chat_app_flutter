@@ -1,5 +1,6 @@
 import 'package:babbleapp/app/modules/chat/views/chat_view.dart';
 import 'package:babbleapp/app/modules/search/controllers/search_controller.dart';
+import 'package:babbleapp/app/modules/search/views/widget/search_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +15,10 @@ class SearchListWidget extends StatelessWidget {
           return searchController.searchSnapshot == null
               ? Container()
               : ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Color.fromARGB(255, 13, 145, 18),
+                  leading: SearchAvatarWidget(
+                    radius: 30,
+                    size: Size(40, 40),
+                    index: index,
                   ),
                   title: Text(
                     searchController.searchSnapshot!.docs[index]
@@ -29,6 +32,9 @@ class SearchListWidget extends StatelessWidget {
                   trailing: InkWell(
                     onTap: () {
                       Get.off(ChatView());
+                      searchController.createChatROmmAndStartConvo(
+                          searchController.searchSnapshot!.docs[index]
+                              .get("firstname"));
                       searchController.searchTextController.clear();
                     },
                     child: Container(

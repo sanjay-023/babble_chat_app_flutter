@@ -1,20 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
-  //TODO: Implement ChatController
+  // //TODO: Implement ChatController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  // final count = 0.obs;
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  // }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  // }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  // @override
+  // void onClose() {}
+  // void increment() => count.value++;
+
+  final chatTextController = TextEditingController();
 }

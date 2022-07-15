@@ -11,6 +11,7 @@ class SignoutButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: () {
           authServiceController.signOut();
+          authServiceController.clearSharedprfns();
         },
         child: Text("Sign out"),
         style: ElevatedButton.styleFrom(
