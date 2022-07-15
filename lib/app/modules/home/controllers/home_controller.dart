@@ -29,6 +29,7 @@ class HomeController extends GetxController {
       update();
       HelperFunction.saveUserName(userModel.firstName);
       gconstCOntroller.getUsetInfoLogin();
+      update();
     });
   }
 }

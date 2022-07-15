@@ -7,6 +7,7 @@ import '../controllers/chat_controller.dart';
 
 class ChatView extends GetView<ChatController> {
   final chatController = Get.put(ChatController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +22,7 @@ class ChatView extends GetView<ChatController> {
                 SizedBox(
                   width: 15,
                 ),
-                Text(
-                  "Sanjay",
-                )
+                Text(Get.arguments.toString().capitalizeFirst!)
               ],
             )),
         body: Stack(
@@ -39,7 +38,10 @@ class ChatView extends GetView<ChatController> {
                         hText: "Enter message"),
                     SizedBox(width: 3),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        chatController.sendMessage();
+                        chatController.chatTextController.clear();
+                      },
                       child: CircleAvatar(
                         radius: 24,
                         backgroundColor: Color.fromARGB(255, 5, 145, 9),

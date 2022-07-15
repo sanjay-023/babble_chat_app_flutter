@@ -11,4 +11,24 @@ class DatabaseMethod extends GetxController {
       print(e.toString());
     });
   }
+
+  addConversationMessages(String chatRoomId, messageMap) {
+    FirebaseFirestore.instance
+        .collection("chatroom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .add(messageMap)
+        .catchError((e) {
+      print(e.message);
+      update();
+    });
+  }
+
+  Stream getConversationMessages(String chatRoomId) {
+    return FirebaseFirestore.instance
+        .collection("chatroom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .snapshots();
+  }
 }

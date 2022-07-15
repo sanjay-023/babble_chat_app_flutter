@@ -31,11 +31,14 @@ class SearchListWidget extends StatelessWidget {
                   ),
                   trailing: InkWell(
                     onTap: () {
-                      Get.off(ChatView());
                       searchController.createChatROmmAndStartConvo(
                           searchController.searchSnapshot!.docs[index]
                               .get("firstname"));
                       searchController.searchTextController.clear();
+                      Get.off(ChatView(),
+                          arguments: searchController
+                              .searchSnapshot!.docs[index]
+                              .get("firstname"));
                     },
                     child: Container(
                       height: 30,
