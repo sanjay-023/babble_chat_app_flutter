@@ -1,16 +1,21 @@
 # babbleapp
 
-A new Flutter project.
+Babble is a simple chat app that users can send messages instantly build with flutter and firebase as backend
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The app is built in MVC architecture with Get X as state management and firebase as backend. Users can sign up with their email id. Also this app supports google sign in and signup. After registering in the app users can search for other users and send messages instantly.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Libraries & packages used
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Getx
+- get_cli
+- firebase_core
+- firebase_firestore
+- firebase_storage
+- google_signin
+- crop_image
+- image_picker
+
+
